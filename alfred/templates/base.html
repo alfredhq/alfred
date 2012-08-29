@@ -35,9 +35,10 @@
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
               {% if current_user.is_authenticated() %}
-                Logged in as {{ current_user.login }}
+                <img class="img" src="{{ gravatar_url(current_user.email, 20) }}" alt="{{ current_user.name }}">
+                {{ current_user.login }}
               {% else %}
-                <a href="#" class="navbar-link">Login with Github</a>
+                <a href="{{ auth_url }}" class="navbar-link">Login with Github</a>
               {% endif %}
             </p>
             <ul class="nav">
