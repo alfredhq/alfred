@@ -5,6 +5,7 @@ from flask import Flask
 from .auth import login_manager
 from .config import configure
 from .database import db
+from .views.web import web
 
 
 def create_app(config):
@@ -13,5 +14,7 @@ def create_app(config):
 
     db.init_app(app)
     login_manager.init_app(app)
+
+    app.register_blueprint(web)
 
     return app
