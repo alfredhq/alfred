@@ -16,6 +16,7 @@ setup(
         'Flask-Alfred-DB',
         'argh',
         'PyYAML',
+        'Flask-Login',
     ],
     entry_points={
         'console_scripts': [
