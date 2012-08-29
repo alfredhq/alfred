@@ -13,6 +13,7 @@ nose==1.1.2
 Flask-Login==0.1.3
 PyGithub==1.4
 requests-oauth2==0.2.0
+  requests==0.13.9
 
 -e git://github.com/alfredhq/flask-alfred-db.git@409f59f678fb73dc5edf4fd042f285b6d64f690a#egg=Flask-Alfred-DB
 -e git://github.com/alfredhq/alfred-db.git@0c7ba1aa1a6df89983e1e294f350182670faa3a2#egg=alfred-db
