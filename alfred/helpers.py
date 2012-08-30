@@ -37,9 +37,9 @@ def get_user_by_token(access_token):
             email=github_user.email,
             login=github_user.login,
         )
+        db.session.add(user)
     else:
         user.github_access_token = access_token
         user.login = github_user.login
-    db.session.add(user)
     db.session.commit()
     return user
