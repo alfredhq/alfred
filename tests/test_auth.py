@@ -16,7 +16,9 @@ class AuthTestCase(DatabaseTestCase):
             'alfred.views.auth.get_oauth2_handler',
         )
         self.get_oauth2_handler = oauth2_patcher.start()
-        self.get_oauth2_handler().get_token.return_value = {'access_token': ['token']}
+        self.get_oauth2_handler().get_token.return_value = {
+            'access_token': ['token']
+        }
         self.callback_url = href(url_for('auth.callback'), code='testcode')
         self.mock_github()
 
@@ -41,11 +43,11 @@ class AuthTestCase(DatabaseTestCase):
         self.assertRedirects(response, url_for('web.index'))
 
     def test_token_response(self):
-        response = self.client.get(self.callback_url)
+        self.client.get(self.callback_url)
         self.get_oauth2_handler().get_token.assert_called_with('testcode')
 
     def test_github_api_call(self):
-        response = self.client.get(self.callback_url)
+        self.client.get(self.callback_url)
         self.github.assert_called_with('token')
 
     def test_user_attrs(self):
