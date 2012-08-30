@@ -16,6 +16,9 @@ setup(
         'Flask-Alfred-DB',
         'argh',
         'PyYAML',
+        'Flask-Login',
+        'PyGithub',
+        'requests-oauth2',
     ],
     entry_points={
         'console_scripts': [
