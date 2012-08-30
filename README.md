@@ -1,6 +1,6 @@
 #Alfred
 
-[![Build Status](https://secure.travis-ci.org/alfredhq/alfred?branch=develop)](http://travis-ci.org/alfredhq/alfred)
+[![Build Status](https://secure.travis-ci.org/alfredhq/alfred.png?branch=develop)](http://travis-ci.org/alfredhq/alfred)
 
 ##Instructions
 
