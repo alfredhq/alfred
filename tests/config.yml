@@ -1,2 +1,10 @@
 database_uri: 'sqlite:///:memory:'
 testing: true
+secret_key: 'secret key'
+github:
+  client_id: ''
+  client_secret: ''
+  auth_url: 'https://github.com/login/'
+  scopes: 'public_repo'
+  authorize_url: 'oauth/authorize'
+  token_url: 'oauth/access_token'
