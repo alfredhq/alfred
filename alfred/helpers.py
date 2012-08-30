@@ -20,8 +20,12 @@ def get_shell():
 def get_oauth2_handler():
     GITHUB = current_app.config['GITHUB']
     return OAuth2(
-        GITHUB['client_id'], GITHUB['client_secret'], GITHUB['auth_url'],
-        '', GITHUB['authorize_url'], GITHUB['token_url']
+        client_id=GITHUB['client_id'],
+        client_secret=GITHUB['client_secret'],
+        site=GITHUB['auth_url'],
+        redirect_uri='',
+        authorization_url=GITHUB['authorization_url'],
+        token_url=GITHUB['token_url']
     )
 
 
