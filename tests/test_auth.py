@@ -12,18 +12,23 @@ from .base import DatabaseTestCase, href
 class AuthTestCase(DatabaseTestCase):
 
     def setUp(self):
-        oauth2_patcher = mock.patch(
+        self.oauth2_patcher = mock.patch(
             'alfred.views.auth.get_oauth2_handler',
         )
-        self.get_oauth2_handler = oauth2_patcher.start()
+        self.get_oauth2_handler = self.oauth2_patcher.start()
         self.get_oauth2_handler().get_token.return_value = {
             'access_token': ['token']
         }
         self.callback_url = href(url_for('auth.callback'), code='testcode')
         self.mock_github()
 
+    def tearDown(self):
+        self.oauth2_patcher.stop()
+        self.github_patcher.stop()
+
     def mock_github(self):
-        self.github = mock.patch('alfred.helpers.Github').start()
+        self.github_patcher = mock.patch('alfred.helpers.Github')
+        self.github = self.github_patcher.start()
         self.github_api = self.github.return_value
         github_user = mock.Mock()
         github_user.id = '1000'
