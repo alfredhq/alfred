@@ -10,7 +10,7 @@ from ..helpers import get_oauth2_handler, get_user_by_token
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/callback/', methods=['GET'])
+@auth.route('/callback/')
 def callback():
     oauth2_handler = get_oauth2_handler()
     code = request.args.get('code')
