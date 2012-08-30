@@ -1,6 +1,7 @@
 import mock
 
 from flask import url_for
+from flask_login import current_user
 
 from alfred.database import db
 from alfred_db.models import User
@@ -35,6 +36,11 @@ class AuthTestCase(DatabaseTestCase):
         github_user.login = 'bender'
         github_user.email = 'bender@futurama.fox'
         self.github_api.get_user.return_value = github_user
+
+    def test_user_in_context(self):
+        self.client.get('/')
+        context_user = self.get_context_variable('current_user')
+        self.assertEqual(context_user, current_user)
 
     def test_callback_redirect(self):
         response = self.client.get(self.callback_url)
