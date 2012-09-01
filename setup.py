@@ -19,6 +19,10 @@ setup(
         'Flask-Login',
         'PyGithub',
         'requests-oauth2',
+        'Gears',
+        'Flask-Gears',
+        'gears-clean-css',
+        'gears-uglifyjs',
     ],
     entry_points={
         'console_scripts': [
