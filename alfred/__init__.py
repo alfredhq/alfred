@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_gears import Gears
 
 from .auth import login_manager
 from .config import configure
@@ -13,6 +14,7 @@ def create_app(config):
 
     db.init_app(app)
     login_manager.init_app(app)
+    Gears(app)
 
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(web)

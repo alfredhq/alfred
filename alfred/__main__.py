@@ -34,9 +34,15 @@ def shell(app, args):
         sh(app=app)
 
 
+@with_app
+def collectassets(app, args):
+    from flask_gears import Gears
+    Gears().get_environment(app).save()
+
+
 def main():
     parser = ArghParser()
-    parser.add_commands([runserver, shell])
+    parser.add_commands([runserver, shell, collectassets])
     parser.dispatch()
 
 
