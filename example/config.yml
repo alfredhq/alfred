@@ -1,5 +1,5 @@
 database_uri: 'postgresql://localhost/alfred'
-secret_key: 'secret'
+secret_key: ''
 github:
   client_id: ''
   client_secret: ''
