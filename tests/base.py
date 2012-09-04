@@ -11,7 +11,10 @@ from alfred.database import db
 
 TESTS_DIR = os.path.dirname(__file__)
 FIXTURES_DIR = os.path.join(TESTS_DIR, 'fixtures')
-CONFIG = os.path.join(TESTS_DIR, 'config.yml')
+if os.environ.get('TRAVIS'):
+    CONFIG = os.path.join(TESTS_DIR, 'travis.yml')
+else:
+    CONFIG = os.path.join(TESTS_DIR, 'config.yml')
 
 
 class ContextVariableDoesNotExist(Exception):

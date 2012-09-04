@@ -1,4 +1,4 @@
-database_uri: 'postgresql://localhost/alfred_test'
+database_uri: 'postgresql://postgres@localhost/alfred_test'
 testing: true
 secret_key: ''
 github:
