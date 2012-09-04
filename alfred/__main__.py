@@ -2,20 +2,22 @@
 
 import os
 from argh import arg, ArghParser
+from argh.exceptions import CommandError
 from functools import wraps
 
 
-DIR = os.path.abspath(os.path.dirname(__file__))
-CONFIG = os.path.join(DIR, 'configs', 'default.yml')
-CONFIG = os.environ.get('ALFRED_CONFIG', CONFIG)
+CONFIG = os.environ.get('ALFRED_CONFIG')
 
 
 def with_app(func):
     @wraps(func)
-    def wrapper(*args, **kwargs):
+    @arg('--config', help='path to config')
+    def wrapper(args):
         from alfred import create_app
-        app = create_app(CONFIG)
-        return func(app, *args, **kwargs)
+        if not CONFIG and not args.config:
+            raise CommandError('There is no config file specified')
+        app = create_app(args.config or CONFIG)
+        return func(app, args)
     return wrapper
 
 
