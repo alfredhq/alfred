@@ -1,3 +1,9 @@
+import hashlib
+import os
+import string
+
+from random import choice
+
 from alfred_db.models import User
 from flask import current_app
 from github import Github
@@ -29,6 +35,12 @@ def get_oauth2_handler():
     )
 
 
+def generate_apitoken(token):
+    random_hex = os.urandom(32).encode('hex')
+    base = string.letters + random_hex + string.digits + token
+    return hashlib.sha1(''.join(choice(base) for n in range(100))).hexdigest()
+
+
 def get_user_by_token(access_token):
     api = Github(access_token)
     github_user = api.get_user()
@@ -40,6 +52,7 @@ def get_user_by_token(access_token):
             name=github_user.name,
             email=github_user.email,
             login=github_user.login,
+            apitoken=generate_apitoken(access_token)
         )
         db.session.add(user)
     else:

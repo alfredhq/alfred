@@ -12,6 +12,7 @@ from .base import DatabaseTestCase, href
 class AuthTestCase(DatabaseTestCase):
 
     def setUp(self):
+        self.callback_url = href(url_for('auth.callback'), code='testcode')
         self.oauth2_patcher = mock.patch(
             'alfred.views.auth.get_oauth2_handler',
         )
@@ -19,7 +20,6 @@ class AuthTestCase(DatabaseTestCase):
         self.get_oauth2_handler().get_token.return_value = {
             'access_token': ['token']
         }
-        self.callback_url = href(url_for('auth.callback'), code='testcode')
         self.mock_github()
 
     def tearDown(self):
@@ -54,14 +54,18 @@ class AuthTestCase(DatabaseTestCase):
         self.client.get(self.callback_url)
         self.github.assert_called_with('token')
 
-    def test_user_attrs(self):
+    @mock.patch('alfred.helpers.generate_apitoken')
+    def test_user_attrs(self, generate_apitoken):
+        generate_apitoken.return_value = 'RANDOM'
         self.client.get(self.callback_url)
         user = db.session.query(User).filter_by(github_id='1000').first()
         self.assertIsNotNone(user)
+        generate_apitoken.assertCalledWith('token')
         self.assertEqual(user.login, 'bender')
         self.assertEqual(user.name, 'Bender Rodrigues')
         self.assertEqual(user.email, 'bender@futurama.fox')
         self.assertEqual(user.github_access_token, 'token')
+        self.assertEqual(user.apitoken, 'RANDOM')
 
     @mock.patch('alfred.views.auth.login_user')
     def test_user_logged_in(self, login_user):
