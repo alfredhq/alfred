@@ -38,8 +38,8 @@ def shell(app, args):
 
 @with_app
 def collectassets(app, args):
-    from flask_gears import Gears
-    Gears().get_environment(app).save()
+    from alfred.assets import gears
+    gears.get_environment(app).save()
 
 
 def main():
