@@ -20,8 +20,8 @@ blinker==1.2
 ipython==0.13
 psycopg2==2.4.5
 
--e git://github.com/gears/gears.git@develop#egg=Gears
-  -e git://github.com/gears/flask-gears.git@develop#egg=Flask-Gears
+Gears==0.4
+  Flask-Gears==0.1.2
   gears-clean-css==0.1.1
   gears-uglifyjs==0.1
 
