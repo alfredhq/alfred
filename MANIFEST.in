@@ -1,7 +1,5 @@
 include LICENSE
 include README.md
-include alfred/static/js/jquery-1.8.0.min.js
 
 recursive-include alfred/assets *
-recursive-include alfred/static/img *
 recursive-include alfred/templates *
