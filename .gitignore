@@ -2,5 +2,4 @@ build/
 *.egg-info
 *.pyc
 *.pyo
-alfred/static/css/style.css
-alfred/static/js/script.js
+alfred/static/
