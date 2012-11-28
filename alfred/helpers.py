@@ -46,6 +46,9 @@ def get_user_by_token(access_token):
     github_user = api.get_user()
     user = db.session.query(User).filter_by(github_id=github_user.id).first()
     if user is None:
+        beta_users = current_app.config.get('BETA_USERS')
+        if beta_users and github_user.login not in beta_users:
+            return
         user = User(
             github_access_token=access_token,
             github_id=github_user.id,

@@ -19,7 +19,8 @@ def callback():
         return redirect(url_for('web.index'))
     access_token = response['access_token'][0]
     user = get_user_by_token(access_token)
-    login_user(user)
+    if user:
+        login_user(user)
     return redirect(url_for('web.index'))
 
 
