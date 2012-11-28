@@ -8,3 +8,7 @@ github:
   scopes: 'public_repo'
   authorization_url: 'oauth/authorize'
   token_url: 'oauth/access_token'
+beta_users:
+  - xobb1t
+  - yumike
+  - nyumatova
