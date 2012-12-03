@@ -12,3 +12,6 @@ beta_users:
   - xobb1t
   - yumike
   - nyumatova
+amqp:
+  url: 'amqp://guest:guest@localhost:5672/%2F'
+  sync_queue_name: 'sync'
