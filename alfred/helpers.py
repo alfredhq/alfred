@@ -1,6 +1,8 @@
 import hashlib
 import os
 import string
+import pika
+import msgpack
 
 from random import choice
 
@@ -63,3 +65,21 @@ def get_user_by_token(access_token):
         user.login = github_user.login
     db.session.commit()
     return user
+
+
+def send_to_amqp(tasks, queue_name):
+    amqp_config = current_app.config['AMQP']
+    connection = pika.BlockingConnection(pika.URLParameters(
+        amqp_config['url'],
+    ))
+    channel = connection.channel()
+    channel.queue_declare(queue=queue_name, durable=True)
+    for task in tasks:
+        message = msgpack.packb(task, encoding='utf-8')
+        channel.basic_publish(
+            exchange='',
+            routing_key=queue_name,
+            body=message,
+            properties=pika.BasicProperties(delivery_mode=2),
+        )
+    connection.close()

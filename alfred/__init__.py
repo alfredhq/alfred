@@ -6,6 +6,7 @@ from .config import configure
 from .database import db
 from .views.auth import auth
 from .views.web import web
+from .views.tasks import tasks
 
 
 def create_app(config):
@@ -17,6 +18,7 @@ def create_app(config):
     login_manager.init_app(app)
 
     app.register_blueprint(auth, url_prefix='/auth')
+    app.register_blueprint(tasks, url_prefix='/tasks')
     app.register_blueprint(web)
 
     return app

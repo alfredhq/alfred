@@ -23,6 +23,8 @@ setup(
         'Flask-Gears',
         'gears-clean-css',
         'gears-uglifyjs',
+        'msgpack-python',
+        'pika',
     ],
     entry_points={
         'console_scripts': [
